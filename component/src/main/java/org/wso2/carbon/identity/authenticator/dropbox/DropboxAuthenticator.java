@@ -39,6 +39,7 @@ import org.wso2.carbon.identity.application.authenticator.oidc.OpenIDConnectAuth
 import org.wso2.carbon.identity.application.common.model.ClaimMapping;
 import org.wso2.carbon.identity.application.common.model.Property;
 import org.wso2.carbon.identity.application.common.util.IdentityApplicationConstants;
+import org.wso2.carbon.identity.base.IdentityConstants.IdentityTokens;
 import org.wso2.carbon.identity.core.util.IdentityUtil;
 
 import java.io.BufferedReader;
@@ -231,13 +232,12 @@ public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements 
      * @return Response string.
      * @throws IOException
      */
-    protected String sendRequest(String url, String accessToken)
-            throws IOException {
+    protected String sendRequest(String url, String accessToken) throws IOException {
         if (log.isDebugEnabled()) {
             log.debug("Claim URL: " + url);
         }
 
-        if (url == null) {
+        if (StringUtils.isEmpty(url)) {
             return StringUtils.EMPTY;
         }
 
@@ -248,15 +248,13 @@ public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements 
         BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
         StringBuilder builder = new StringBuilder();
         String inputLine = reader.readLine();
-        while (inputLine != null) {
+        while (StringUtils.isNotEmpty(inputLine)) {
             builder.append(inputLine).append("\n");
             inputLine = reader.readLine();
         }
         reader.close();
-
-        if (log.isDebugEnabled() && IdentityUtil.isTokenLoggable(
-                org.wso2.carbon.identity.base.IdentityConstants.IdentityTokens.USER_ID_TOKEN)) {
-            log.debug("response: " + builder.toString());
+        if (log.isDebugEnabled() && IdentityUtil.isTokenLoggable(IdentityTokens.USER_ID_TOKEN)) {
+            log.debug(" Dropbox user information : " + builder.toString());
         }
         return builder.toString();
     }
