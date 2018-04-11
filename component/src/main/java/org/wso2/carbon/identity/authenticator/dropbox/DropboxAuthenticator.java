@@ -248,11 +248,16 @@ public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements 
         BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
         StringBuilder builder = new StringBuilder();
         String inputLine = reader.readLine();
-        while (StringUtils.isNotEmpty(inputLine)) {
-            builder.append(inputLine).append("\n");
-            inputLine = reader.readLine();
+        try {
+            while (StringUtils.isNotEmpty(inputLine)) {
+                builder.append(inputLine).append("\n");
+                inputLine = reader.readLine();
+            }
+        } finally {
+            if(reader != null) {
+                reader.close();
+            }
         }
-        reader.close();
         if (log.isDebugEnabled() && IdentityUtil.isTokenLoggable(IdentityTokens.USER_ID_TOKEN)) {
             log.debug(" Dropbox user information : " + builder.toString());
         }
