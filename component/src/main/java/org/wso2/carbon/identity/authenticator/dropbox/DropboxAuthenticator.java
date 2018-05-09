@@ -243,7 +243,7 @@ public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements 
 
         URL obj = new URL(url);
         HttpURLConnection urlConnection = (HttpURLConnection) obj.openConnection();
-        urlConnection.setRequestMethod("POST");
+        urlConnection.setRequestMethod(DropboxAuthenticatorConstants.HTTP_POST);
         urlConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
         BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
         StringBuilder builder = new StringBuilder();
@@ -259,7 +259,7 @@ public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements 
             }
         }
         if (log.isDebugEnabled() && IdentityUtil.isTokenLoggable(IdentityTokens.USER_ID_TOKEN)) {
-            log.debug(" Dropbox user information : " + builder.toString());
+            log.debug("Dropbox user information : " + builder.toString());
         }
         return builder.toString();
     }

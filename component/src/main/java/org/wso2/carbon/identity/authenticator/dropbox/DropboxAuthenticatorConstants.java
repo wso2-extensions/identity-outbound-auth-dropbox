@@ -34,4 +34,5 @@ public class DropboxAuthenticatorConstants {
     public static final String CALLBACK_URL="Callback URL";
     public static final String USER_ID="uid";
     public static final String DROPBOX_BASIC_SCOPE ="";
+    public static final String HTTP_POST = "POST";
 }
