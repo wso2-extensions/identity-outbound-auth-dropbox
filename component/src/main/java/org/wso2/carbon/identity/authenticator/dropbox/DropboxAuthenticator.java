@@ -39,12 +39,19 @@ import org.wso2.carbon.identity.application.authenticator.oidc.OpenIDConnectAuth
 import org.wso2.carbon.identity.application.common.model.ClaimMapping;
 import org.wso2.carbon.identity.application.common.model.Property;
 import org.wso2.carbon.identity.application.common.util.IdentityApplicationConstants;
+import org.wso2.carbon.identity.base.IdentityConstants.IdentityTokens;
+import org.wso2.carbon.identity.core.util.IdentityUtil;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Authenticator of Dropbox
@@ -215,5 +222,45 @@ public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements 
     @Override
     protected String getScope(String scope, Map<String, String> authenticatorProperties) {
         return DropboxAuthenticatorConstants.DROPBOX_BASIC_SCOPE;
+    }
+
+    /**
+     * Request user claims from user info endpoint.
+     *
+     * @param url         User info endpoint.
+     * @param accessToken Access token.
+     * @return Response string.
+     * @throws IOException
+     */
+    protected String sendRequest(String url, String accessToken) throws IOException {
+        if (log.isDebugEnabled()) {
+            log.debug("Claim URL: " + url);
+        }
+
+        if (StringUtils.isEmpty(url)) {
+            return StringUtils.EMPTY;
+        }
+
+        URL obj = new URL(url);
+        HttpURLConnection urlConnection = (HttpURLConnection) obj.openConnection();
+        urlConnection.setRequestMethod(DropboxAuthenticatorConstants.HTTP_POST);
+        urlConnection.setRequestProperty("Authorization", "Bearer " + accessToken);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+        StringBuilder builder = new StringBuilder();
+        String inputLine = reader.readLine();
+        try {
+            while (StringUtils.isNotEmpty(inputLine)) {
+                builder.append(inputLine).append("\n");
+                inputLine = reader.readLine();
+            }
+        } finally {
+            if(reader != null) {
+                reader.close();
+            }
+        }
+        if (log.isDebugEnabled() && IdentityUtil.isTokenLoggable(IdentityTokens.USER_ID_TOKEN)) {
+            log.debug("Dropbox user information : " + builder.toString());
+        }
+        return builder.toString();
     }
 }

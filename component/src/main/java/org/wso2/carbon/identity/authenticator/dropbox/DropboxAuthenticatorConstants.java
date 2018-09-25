@@ -24,14 +24,15 @@ public class DropboxAuthenticatorConstants {
     public static final String AUTHENTICATOR_FRIENDLY_NAME = "Dropbox";
 
     //Dropbox authorize endpoint URL
-    public static final String DROPBOX_OAUTH_ENDPOINT = "https://www.dropbox.com/1/oauth2/authorize";
+    public static final String DROPBOX_OAUTH_ENDPOINT = "https://www.dropbox.com/oauth2/authorize";
     //Dropbox token  endpoint URL
-    public static final String DROPBOX_TOKEN_ENDPOINT = "https://api.dropbox.com/1/oauth2/token";
+    public static final String DROPBOX_TOKEN_ENDPOINT = "https://api.dropbox.com/oauth2/token";
     //Dropbox user info endpoint URL
-    public static final String DROPBOX_USERINFO_ENDPOINT = "https://api.dropbox.com/1/account/info";
+    public static final String DROPBOX_USERINFO_ENDPOINT = "https://api.dropbox.com/2/users/get_current_account";
     public static final String CLIENT_ID="Client Id";
     public static final String CLIENT_SECRET="Client Secret";
     public static final String CALLBACK_URL="Callback URL";
     public static final String USER_ID="uid";
     public static final String DROPBOX_BASIC_SCOPE ="";
+    public static final String HTTP_POST = "POST";
 }
