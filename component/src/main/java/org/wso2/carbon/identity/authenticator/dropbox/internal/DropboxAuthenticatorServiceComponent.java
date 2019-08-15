@@ -32,7 +32,7 @@ import java.util.Hashtable;
  */
 public class DropboxAuthenticatorServiceComponent {
 
-    private static Log log = LogFactory.getLog(DropboxAuthenticatorServiceComponent.class);
+    private static final Log log = LogFactory.getLog(DropboxAuthenticatorServiceComponent.class);
 
     protected void activate(ComponentContext ctxt) {
         try {

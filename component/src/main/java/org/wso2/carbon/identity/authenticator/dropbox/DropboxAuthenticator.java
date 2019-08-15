@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DropboxAuthenticator extends OpenIDConnectAuthenticator implements FederatedApplicationAuthenticator {
 
-    private static Log log = LogFactory.getLog(DropboxAuthenticator.class);
+    private static final Log log = LogFactory.getLog(DropboxAuthenticator.class);
 
     /**
      * Get Dropbox authorization endpoint.
