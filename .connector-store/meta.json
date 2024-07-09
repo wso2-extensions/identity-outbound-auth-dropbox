@@ -2,11 +2,27 @@
     "name": "Dropbox",
     "owner": "WSO2",
     "category": "Federated authenticator",
-    "documentationUrl": "https://docs.wso2.com/display/ISCONNECTORS/Dropbox+Authenticator",
+    "documentationUrl": "https://github.com/wso2-extensions/identity-outbound-auth-dropbox/tree/master/docs",
     "description": "The Dropbox authenticator allows you to authenticate users using Dropbox through the WSO2 Identity Server.",
     "status": "Active",
     "labels": [
         "SocialLogin"
     ],
-    "releases": []
+    "releases": [
+        {
+            "tagName": "1.0.1",
+            "products": [
+                "IS 6.0.0",
+                "IS 5.9.0"
+            ]
+        },
+        {
+            "tagName": "1.0.0",
+            "products": [
+                "IS 5.9.0",
+                "IS 5.8.0",
+                "IS 5.7.0"
+            ]
+        }
+    ]
 }
