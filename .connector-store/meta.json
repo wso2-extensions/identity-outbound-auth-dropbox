@@ -2,7 +2,7 @@
     "name": "Dropbox",
     "owner": "WSO2",
     "category": "Federated authenticator",
-    "documentationUrl": "https://docs.wso2.com/display/ISCONNECTORS/Dropbox+Authenticator",
+    "documentationUrl": "https://wso2docs.atlassian.net/wiki/spaces/ISCONNECTORS/pages/35291607/Dropbox+Authenticator",
     "description": "The Dropbox authenticator allows you to authenticate users using Dropbox through the WSO2 Identity Server.",
     "status": "Active",
     "labels": [
