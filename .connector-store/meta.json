@@ -6,7 +6,8 @@
     "description": "The Dropbox authenticator allows you to authenticate users using Dropbox through the WSO2 Identity Server.",
     "status": "Active",
     "labels": [
-        "SocialLogin"
+        "SocialLogin",
+        "Retired(IS 7.1.0+)"
     ],
     "releases": [
         {
